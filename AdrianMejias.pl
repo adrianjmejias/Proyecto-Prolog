@@ -8,7 +8,6 @@ check_valid_char_list([X | Xs]):-
 .
 
 
-
 caracter_valido(X):- char_type(X, alpha), !.
 caracter_valido(','):-!.
 caracter_valido('!'):-!.
@@ -72,6 +71,7 @@ transformar(0, Input, Out):-
     , reverse(Chars, Reversed)
     , char_list_to_atoms(Reversed, AtomList)
     , code_list_to_char_list(AtomList, CharList)
+    , check_valid_char_list(CharList)
     , atomics_to_string(CharList, Out)
 .
 
