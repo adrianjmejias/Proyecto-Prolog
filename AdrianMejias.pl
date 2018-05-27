@@ -2,8 +2,6 @@
 
 % Checkear si un string X forma un string S, e indicar cuantas copias son necesarias para formarlo
 
-% n_periodo()
-
 check_valid_char_list([]).
 check_valid_char_list([X | Xs]):-
     caracter_valido(X), check_valid_char_list(Xs)
@@ -56,7 +54,7 @@ char_list_to_atoms([D1 | [D2 | Rest]], AtomList):-
     , AtomList = [Atom | NAtoms]
     , !
 .
-
+%3 Cifrar y decifrar
 %cifrar
 transformar(1, Input, Out):-
     string_chars(Input, Chars)
@@ -163,7 +161,7 @@ view_repet(Aux,List,[A|_],Out_r):-
     ,Out_r=List
     ,!
     .
-% 2
+% 2 ocurrencias
 ocurrencias("",0):-!.
 ocurrencias(Input,Out):-
     n_periodo(Input,Out_pp)
@@ -172,6 +170,7 @@ ocurrencias(Input,Out):-
     ,!
     .
 
+%4 LCS
 
 lcs([H|Aux],[H|Baux],[H|Lcs]) :-
     !,
