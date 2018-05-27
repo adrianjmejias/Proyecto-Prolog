@@ -169,33 +169,31 @@ ocurrencias(Input,Out):-
     n_periodo(Input,Out_pp)
     ,string_length(Input,Cc)
     ,Out is div(Cc,Out_pp)
-    ,!.
+    ,!
+    .
 
 
+lcs([H|Aux],[H|Baux],[H|Lcs]) :-
+    !,
+    lcs(Aux,Baux,Lcs)
+    .
 
+lcs([A|Aux],[B|Baux],Lcs):-
+    lcs(Aux ,[B|Baux],Lcs1),
+    lcs([A|Aux],Baux ,Lcs2),
+    longest(Lcs1,Lcs2,Lcs)
+    ,!
+    .
 
-test :-
-    time(lcs("thisisatest", "testing123testing", Lcs)),
-    writef('%s',[Lcs]).
- 
- 
-lcs([ H|L1],[ H|L2],[H|Lcs]) :- !,
-    lcs(L1,L2,Lcs).
- 
-lcs([H1|L1],[H2|L2],Lcs):-
-    lcs(    L1 ,[H2|L2],Lcs1),
-    lcs([H1|L1],    L2 ,Lcs2),
-    longest(Lcs1,Lcs2,Lcs),!.
- 
 lcs(_,_,[]).
- 
- 
-longest(L1,L2,Longest) :-
-    length(L1,Length1),
-    length(L2,Length2),
-    ((Length1 > Length2) -> Longest = L1 ; Longest = L2).
 
-spy(S1, S2, Length, Lcs):-
+longest(A,B,Lcs) :-
+    length(A,Length1),
+    length(B,Length2),
+    ((Length1 > Length2) -> Lcs = A ; Lcs = B)
+    .
+
+spy(S1, S2,Lcs,Length):-
     string_chars(S1, C1)
     , string_chars(S2, C2)
     , check_valid_char_list(C1)
