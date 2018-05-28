@@ -125,8 +125,7 @@ check_period(C,[],M,S,W,List_r2):-
 
 check_period([C|_],[A|_],[B|Baux],S,W,List_r2):-
     A\=B
-    ,append(W,[B],X1)
-    ,view_repet(C,X1,Baux,List_r4)
+    ,view_repet(C,W,[B|Baux],List_r4)
     ,check_period([],List_r4,S,S,[],List_r2)
     ,!.
 check_period([],[A|_],[B|Baux],S,W,List_r2):-
@@ -139,6 +138,7 @@ check_period([],[A|_],[B|Baux],S,W,List_r2):-
 %revisar patron
 view_repet(Aux,[],[],[Aux]):-!.
 view_repet(_,A,[],A):-!.
+
 
 view_repet(Aux,[],[A|Auxr],Out_r):-
     Aux\=A
