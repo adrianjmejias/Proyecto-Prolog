@@ -81,7 +81,6 @@ n_periodo("",0):-!.
 
 n_periodo(Input,Out_c):-
     string_chars(Input, Chars)
-    , check_valid_char_list(Chars)
     , search_period(Chars,Out_c)
     ,!
     .
@@ -195,8 +194,6 @@ longest(A,B,Lcs) :-
 spy(S1, S2,Lcs,Length):-
     string_chars(S1, C1)
     , string_chars(S2, C2)
-    , check_valid_char_list(C1)
-    , check_valid_char_list(C2)
     , lcs(C1, C2, R)
     , string_chars(Lcs, R)
     , string_length(Lcs, Length)
