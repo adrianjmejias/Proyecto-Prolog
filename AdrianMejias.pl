@@ -156,45 +156,52 @@ view_repet(Aux,[],[A|_],Out_r):-
     ,!.
 
 view_repet(Aux,List,[A|_],Out_r):-
-    Aux=A
-    ,Out_r=List
+     Aux = A
+    ,Out_r = List
     ,!
     .
 % 2 ocurrencias
 ocurrencias("",0):-!.
-ocurrencias(Input,Out):-
-    n_periodo(Input,Out_pp)
-    ,string_length(Input,Cc)
-    ,Out is div(Cc,Out_pp)
+ocurrencias(Input, Out):-
+     n_periodo(Input, Out_pp)
+    ,string_length(Input, Cc)
+    ,Out is div(Cc, Out_pp)
     ,!
     .
 
 %4 LCS
 
-lcs([H|Aux],[H|Baux],[H|Lcs]) :-
-    !,
-    lcs(Aux,Baux,Lcs)
-    .
+lcs([H | Aux],[H | Baux],[H | Lcs]) :-
+      !
+    , lcs(Aux,Baux,Lcs)
+.
 
-lcs([A|Aux],[B|Baux],Lcs):-
-    lcs(Aux ,[B|Baux],Lcs1),
-    lcs([A|Aux],Baux ,Lcs2),
-    longest(Lcs1,Lcs2,Lcs)
-    ,!
-    .
+lcs([A | Aux],[B | Baux], Lcs):-
+      lcs(Aux , [B | Baux], Lcs1)
+    , lcs([A | Aux], Baux , Lcs2)
+    , longest(Lcs1, Lcs2, Lcs)
+    , !
+.
 
-lcs(_,_,[]).
+lcs(_, _, []).
 
-longest(A,B,Lcs) :-
-    length(A,Length1),
-    length(B,Length2),
-    ((Length1 > Length2) -> Lcs = A ; Lcs = B)
-    .
+longest(A, B, Long) :-
+      length(A, Length1)
+    , length(B, Length2)
+    , Length1 > Length2   
+    , Long = A
+    , !
+.
 
-spy(S1, S2,Lcs,Length):-
-    string_chars(S1, C1)
+longest(A, B, Long):-
+      is_list(A)
+    , is_list(B)
+    , Long = B
+.
+spy(S1, S2, Lcs, Length):-
+      string_chars(S1, C1)
     , string_chars(S2, C2)
     , lcs(C1, C2, R)
     , string_chars(Lcs, R)
     , string_length(Lcs, Length)
-    .
+.
